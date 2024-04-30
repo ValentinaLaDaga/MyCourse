@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 
+
 namespace MyCourse.Models.Services.Infrastractures
 {
     public interface IDatabaseAccessor // interfaccia che rappresenta il servizio infrastrutturale
     {
-        DataSet Query(FormattableString formattableQuery); // metodo che eseguira una query select passata come parametro
+       Task<DataSet> QueryAsync(FormattableString formattableQuery); // metodo che eseguira una query select passata come parametro
     }
 }

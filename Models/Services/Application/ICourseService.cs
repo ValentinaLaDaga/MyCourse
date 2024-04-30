@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyCourse.Models.ViewModels;
+using System.Threading.Tasks;
 
 namespace MyCourse.Models.Services.Application
 {
@@ -11,8 +12,8 @@ namespace MyCourse.Models.Services.Application
     //deve implementare affinchè funzioni
     public interface ICourseService
     {
-        List<CourseViewModel> GetCourses();
-        CourseDetailViewModel GetCourse(int id);
+      Task<List<CourseViewModel>> GetCoursesAsync();
+       Task<CourseDetailViewModel> GetCourseAsync(int id);
         
 
     }

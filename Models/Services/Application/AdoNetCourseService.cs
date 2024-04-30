@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MyCourse.Models.Services.Infrastractures;
 using System.Data;
-
+using System.Threading.Tasks;
 using MyCourse.Models.ViewModels;
 
 namespace MyCourse.Models.Services.Application
@@ -16,10 +16,10 @@ namespace MyCourse.Models.Services.Application
         {
             this.db=db;
         }
-        public List<CourseViewModel> GetCourses()
+        public async Task<List<CourseViewModel>> GetCoursesAsync()
          {
             FormattableString query= $"SELECT Id, Title,ImagePath, Author,Rating,FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency  FROM Courses";
-            DataSet dataSet= db.Query(query);
+            DataSet dataSet=await db.QueryAsync(query);
             var dataTable= dataSet.Tables[0]; //recupera la prima tabella del dataset
             var courseList = new List<CourseViewModel>(); //crea la lista di corsi che deve eseere passata all view
             // per ogni riga presente nalla datatable deve creare un oggetto di tipo CourseViewModel 
@@ -30,11 +30,11 @@ namespace MyCourse.Models.Services.Application
             }
             return courseList;
          }
-       public CourseDetailViewModel GetCourse(int id)
+       public async Task<CourseDetailViewModel> GetCourseAsync(int id)
        {
            FormattableString query = $@"SELECT Id, Title, Description, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Id={id}
             ; SELECT Id, Title, Description, Duration FROM Lessons WHERE CourseId={id}";
-            DataSet dataSet= db.Query(query);
+            DataSet dataSet=await db.QueryAsync(query);
             var courseTable = dataSet.Tables[0];
             
             //dato che la prima query mi ritorna esattamente una riga, controllo se effettivamente 
