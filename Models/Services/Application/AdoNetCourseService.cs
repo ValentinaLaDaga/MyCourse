@@ -18,7 +18,7 @@ namespace MyCourse.Models.Services.Application
         }
         public List<CourseViewModel> GetCourses()
          {
-            string query= "SELECT Id, Title,ImagePath, Author,Rating,FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency  FROM Courses";
+            FormattableString query= $"SELECT Id, Title,ImagePath, Author,Rating,FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency  FROM Courses";
             DataSet dataSet= db.Query(query);
             var dataTable= dataSet.Tables[0]; //recupera la prima tabella del dataset
             var courseList = new List<CourseViewModel>(); //crea la lista di corsi che deve eseere passata all view
@@ -32,8 +32,8 @@ namespace MyCourse.Models.Services.Application
          }
        public CourseDetailViewModel GetCourse(int id)
        {
-           string query = "SELECT Id, Title, Description, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Id=" + id +
-            "; SELECT Id, Title, Description, Duration FROM Lessons WHERE CourseId=" + id;
+           FormattableString query = $@"SELECT Id, Title, Description, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Id={id}
+            ; SELECT Id, Title, Description, Duration FROM Lessons WHERE CourseId={id}";
             DataSet dataSet= db.Query(query);
             var courseTable = dataSet.Tables[0];
             
