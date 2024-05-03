@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using MyCourse.Models.Entities;
 
 namespace MyCourse.Models.Entities
 {
@@ -49,26 +50,16 @@ namespace MyCourse.Models.Entities
                         builder.Property(money => money.Currency).HasConversion<string>();
                     });
 
+                    //Andiamo a settare la relazione 1 a n tra l'entità corso e l'entità lezione
+                    entity.HasMany(course => course.Lessons).WithOne(lesson => lesson.Course).HasForeignKey(lesson => lesson.CourseId);
+
             });
 
+
+            //andiamo a settare la relazione n a 1 tra l'entity Lesson e l'entity Course
             modelBuilder.Entity<Lesson>(entity =>
             {
-                    /* entity.Property(e => e.Id).ValueGeneratedNever();
-
-                     entity.Property(e => e.Description).HasColumnType("TEXT (10000)");
-
-                     entity.Property(e => e.Duration)
-                         .IsRequired()
-                         .HasColumnType("TEXT (8)")
-                         .HasDefaultValueSql("'00:00:00'");
-
-                     entity.Property(e => e.Title)
-                         .IsRequired()
-                         .HasColumnType("TEXT (100)");
-
-                     entity.HasOne(d => d.Course)
-                         .WithMany(p => p.Lessons)
-                         .HasForeignKey(d => d.CourseId); */
+                entity.HasOne(lesson => lesson.Course).WithMany(course => course.Lessons);
 
             });
             

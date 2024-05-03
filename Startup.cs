@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using MyCourse.Models.Services.Application;
-using MyCourse.Models.Services.Infrastractures;
+using MyCourse.Models.Services.Infrastructure;
+using MyCourse.Models.Entities;
 
 namespace MyCourse
 {
@@ -26,10 +27,12 @@ namespace MyCourse
 
             //registrazione del servizio di dependency a injection:
            // services.AddTransient<ICourseService, CourseService>(); 
-           services.AddTransient<ICourseService, AdoNetCourseService>(); // il servizio precedente (riga 28) che implementava il servizio in maniera random viene sostituito dal nuovo servizio che leggera i dati da db
-           
+           //services.AddTransient<ICourseService, AdoNetCourseService>(); // il servizio precedente (riga 28) che implementava il servizio in maniera random viene sostituito dal nuovo servizio che leggera i dati da db
+           services.AddTransient<ICourseService, EfCoreCourseService>(); 
+
             //quando un controller ha nel suo costruttore un oggetto di tipo ICourseService, crea un oggetto di tipo CourseService
             services.AddTransient<IDatabaseAccessor, SqliteDatabaseAccessor>();
+            services.AddDbContext<MyCourseDbContext>();//registro il servizio DbContext per poter utilizzare Entity Framework Core nell'app
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

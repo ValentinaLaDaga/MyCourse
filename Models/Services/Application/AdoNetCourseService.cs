@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MyCourse.Models.Services.Infrastractures;
+using MyCourse.Models.Services.Infrastructure;
 using System.Data;
 using System.Threading.Tasks;
 using MyCourse.Models.ViewModels;

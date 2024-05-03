@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using MyCourse.Models.Services.Infrastractures;
+using MyCourse.Models.Services.Infrastructure;
 using Microsoft.Data.Sqlite;
 using System.Threading.Tasks;
 
-namespace MyCourse.Models.Services.Infrastractures
+namespace MyCourse.Models.Services.Infrastructure
 {
     public class SqliteDatabaseAccessor : IDatabaseAccessor //classe che implementera concretamente il servizio infrastrutturale cioe si connettera al database ed eseguira le query scritte in sql
     {

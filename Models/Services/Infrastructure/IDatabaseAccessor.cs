@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Data;
 
 
-namespace MyCourse.Models.Services.Infrastractures
+namespace MyCourse.Models.Services.Infrastructure
 {
     public interface IDatabaseAccessor // interfaccia che rappresenta il servizio infrastrutturale
     {

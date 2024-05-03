@@ -22,6 +22,11 @@ namespace MyCourse.Models.ViewModels
             */
         }
 
+        public CourseDetailViewModel()
+        {
+            Lezioni = new List<LessonViewModel>();
+        }
+
         public static new CourseDetailViewModel FromDataRow(DataRow courseRow){
             var courseDetailViewModel = new CourseDetailViewModel{
                 Titolo= Convert.ToString(courseRow["Title"]), //recupero il titolo dal db leggendo la colonna title
